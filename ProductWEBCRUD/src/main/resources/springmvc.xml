@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		">
+
+	<!-- 頁面控制器 -->
+	<mvc:view-controller path="/" view-name="index" />
+	<!-- 開啟MVC註解驅動 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<tx:annotation-driven></tx:annotation-driven>
+	
+	<context:component-scan
+	base-package="tw.com.springmvc.controller"></context:component-scan>
+	
+	<context:component-scan
+	base-package="tw.com.springmvc.dao"></context:component-scan>
+	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		name="viewResolver">
+		<!-- 網頁放置路徑 /WEB-INF/可以依需求給名稱，但不能使用中文 -->
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<!-- 網頁副檔名 .jsp -->
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	
+	<!-- 資料庫控制的bean -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+	 name="ds">
+	 	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+	 	<property name="url" value="jdbc:mysql://localhost:3306/productcrud
+	 	?serverTimezone=UTC&amp;useunicode=true&amp;characterencoding=utf-8"></property>
+	 	<property name="username" value="root"></property>
+	 	<property name="password" value="$RFV5tgb^YHN"></property>
+	</bean>
+	
+	
+	<!-- JPA 控制的bean -->
+	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+	 name="factory">
+	 
+	 	<property name="dataSource" ref="ds"></property>
+	 	<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.htm2ddl.auto">update</prop>
+
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>tw.com.springmvc.entity.Product</value>
+			
+			</list>
+		
+		
+		</property>
+		
+	</bean>
+	
+	<!-- 自動實作CRUD Template 模板 -->
+	<bean class="org.springframework.orm.hibernate5.HibernateTemplate"
+	 name="hibernateTemplate">
+	 	<property name="sessionFactory" ref="factory"></property>
+	</bean>
+	
+	<!-- TransacionManager 模板-->
+	<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+	 name="transactionManager">
+	 	<property name="sessionFactory" ref="factory"></property>
+	</bean>
+	
+	
+	
+	
+</beans>

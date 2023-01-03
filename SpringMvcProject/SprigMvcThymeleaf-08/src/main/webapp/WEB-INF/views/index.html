@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>首頁index</h1>
+<h2>thymeleaf的頁面 是Spring Boot 的 Html模板</h2><br>
+A標籤(連結)<a th:href="@{/getsucc}"><h2>這是A標籤</h2></a><br>
+A標籤(連結)<a th:href="@{/getsucc?uname=gggg&pass=987}"><h2>這是A標籤</h2></a><br>
+
+表單<br>
+<br>
+<form th:action="@{/getsucc}" method="POST">
+	帳號:<input type="text" name="uname"><br><br>
+	密碼:<input type="password" name="pass"><br><br>
+	
+	<input type="submit" value="BUTTON">
+</form>
+
+<br><br><br>
+<a th:href="@{/p1(uname='root',pass=123)}"><h2>傳入Param</h2></a><br>
+
+</body>
+</html>

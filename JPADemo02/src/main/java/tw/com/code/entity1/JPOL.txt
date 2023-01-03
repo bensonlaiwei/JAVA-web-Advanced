@@ -1,0 +1,15 @@
+SQL
+JPA JPQL 跟sql語法差不多
+
+JPQL直接寫在城市中
+String sql = "select * from jpa_customer"
+
+SELECt c from Customer c where c.id=?
+
+
+
+CRUD 
+新增(一對多、多對一、多對多)，Table and table 
+刪除
+更新
+查詢(使用最多) @NameQuery、@Query

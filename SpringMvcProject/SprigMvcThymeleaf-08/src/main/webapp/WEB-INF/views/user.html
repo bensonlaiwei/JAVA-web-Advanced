@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>使用實體1 Register</h1><br>
+
+<form th:action="@{user}" method="post">
+	帳號:<input type="text" name="username"><br><br>
+	密碼:<input type="password" name="password"><br><br>
+	性別:<input type="radio" name="sex" value="男">男
+		<input type="radio" name="sex" value="女">女<br><br>
+	年齡:<input type="text" name="age"><br><br>
+	郵件:<input type="text" name="email"><br><br>
+<input type="submit" value="Register">
+
+</form>
+
+
+
+
+<h1>使用實體2 login</h1><br>
+
+<form th:action="@{user1}" method="post">
+	帳號:<input type="text" name="username"><br><br>
+	密碼:<input type="password" name="password"><br><br>
+	郵件:<input type="text" name="email"><br><br>
+<input type="submit" value="login">
+
+</form>
+
+
+<h1>使用實體2 login(user2)</h1><br>
+
+<form th:action="@{user2}" method="post">
+	帳號:<input type="text" name="username"><br><br>
+	密碼:<input type="password" name="password"><br><br>
+	郵件:<input type="text" name="email"><br><br>
+<input type="submit" value="login">
+
+</form>
+
+
+
+
+
+
+
+</body>
+</html>

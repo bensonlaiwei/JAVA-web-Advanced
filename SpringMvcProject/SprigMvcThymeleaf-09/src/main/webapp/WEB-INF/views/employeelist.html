@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table border="1" cellspacing="0" style="text-align:center;">
+	<tr>
+		<th colspan="5">Employee info</th>
+	<tr>
+	<tr>
+		<th>編號</th>
+		<th>姓名</th>
+		<th>郵件</th>
+		<th>性別</th>
+		<th>操作</th>
+	</tr>
+	<tr th:each="employee:${employeelist}">
+		<td th:text="${employee.id}"></td>
+		<td th:text="${employee.name}"></td>
+		<td th:text="${employee.email}"></td>
+		<td th:text="${employee.gender}"></td>
+		<td>
+		
+			<a th:href="@{/employee/}+${employee.id}">刪除</a>
+			<a href="">更新</a>
+		</td>
+	</tr>
+</table>
+	<form method="post">
+		<input type="hidden" name="_method" value="刪除">
+	</form>
+
+	<!-- vue框架 -->
+	
+
+
+</body>
+</html>

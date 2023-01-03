@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 頁面控制器 -->
+	<mvc:view-controller path="/" view-name="index" />
+	<!-- 開啟MVC註解驅動 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<context:component-scan
+		base-package="tw.com.lccnet.spring"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver"
+		id="viewResolver">
+		<!-- 設定解析器的層級 -->
+		<property name="order" value="1" />
+		<!-- 設定編碼 -->
+		<property name="characterEncoding" value="UTF-8" />
+		<!-- 頁面模組 -->
+		<property name="templateEngine">
+			<!-- 模組參考位置 -->
+			<bean class="org.thymeleaf.spring5.SpringTemplateEngine">
+				<property name="templateResolver">
+					<!-- Template模組的API -->
+					<bean
+						class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+						<!-- 網頁放置路徑 /WEB-INF/可以依需求給名稱，但不能使用中文 -->
+						<property name="prefix" value="/WEB-INF/views/"></property>
+						<!-- 網頁副檔名 .html -->
+						<property name="suffix" value=".html"></property>
+						<!-- 使用HTML5 -->
+						<property name="templateMode" value="HTML5"></property>
+						<!-- 顯示為中文 -->
+						<property name="characterEncoding" value="utf-8"></property>
+
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+</beans>
